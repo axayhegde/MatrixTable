@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<head>
+    <title>Sum Table Column</title>
+</head>
+<body>
+<script>
+    window.onload = function(){
+
+        var color;
+        var p=0;
+        document.write("<table border='1px' align='center' >");
+
+        for(var i = 0; i< 10; i++){
+            document.write("<tr style='height:50px;'>");
+
+            for(var j=0; j < 10; j++){
+                p++;
+                document.write("<td style='width: 50px;text-align: center;background-color: aqua'>" + p + "</td>");
+            }
+            document.write("</tr>");
+        }
+        document.write("</table>");
+    }
+
+ </script>
+
+</body>
