@@ -1,0 +1,120 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Custom Calendar</title>
+    <style>
+        #grid {
+            margin: 10px;
+            font-size: 2em;
+        }
+
+        table {
+            border-collapse: collapse;
+            border: 1px solid #7f7f7f;
+        }
+
+        td {
+            border: 1px solid #7f7f7f;
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            background-color: aquamarine;
+        }
+    </style>
+</head>
+<body>
+<h2>Select the month</h2>
+<select id="monthNumb" onchange="monthSelected(this.value)">
+    <option value="#"></option>
+    <option value="0">January</option>
+    <option value="1">February</option>
+    <option value="2">March</option>
+    <option value="3">April</option>
+    <option value="4">May</option>
+    <option value="5">June</option>
+    <option value="6">July</option>
+    <option value="7">August</option>
+    <option value="8">September</option>
+    <option value="9">October</option>
+    <option value="10">November</option>
+    <option value="11">December</option>
+</select>
+<hr/>
+
+<table>
+    <tr>
+        <td>Sun</td>
+        <td>Mon</td>
+        <td>Tue</td>
+        <td>Wed</td>
+        <td>Thu</td>
+        <td>Fri</td>
+        <td>Sat</td>
+    </tr>
+</table>
+<div id="grid" style="margin-left: 0px;"></div>
+<script>
+    var rows = 6;
+    var cols = 7;
+    var cellCount = 1;
+    var monthNumber;
+    var yearx = 2018;
+    var firstDayD;
+    var lastDayD;
+    var firstDay = 0;
+
+
+    function monthSelected(monthNum) {
+        monthNumber = monthNum;
+
+        firstDayD = new Date(yearx, monthNumber, 1).getDay();
+        lastDayD = new Date(yearx, monthNumber + 1, 0);
+
+        firstDay = firstDayD;
+        populateCalendar();
+    }
+
+
+    function tableDraw() {
+
+        var grid = document.getElementById('grid');
+        var tbl = document.createElement("table");
+
+        for (var rowsCount = 0; rowsCount < rows; rowsCount++) {
+            var row = document.createElement("tr");
+
+            row.setAttribute('id', rowsCount);
+
+
+            //creating columns for the table
+            for (var colCount = 0; colCount < cols; colCount++) {
+                var col = document.createElement("td");
+
+                col.setAttribute('id',cellCount);
+                console.log(cellCount);
+
+                cellCount++;
+
+                row.appendChild(col);
+
+            }
+            tbl.appendChild(row);
+        }
+        grid.appendChild(tbl);
+    }
+
+    function populateCalendar(){
+
+        for (var counterInc = firstDay+1,i = 1; counterInc < firstDay + 31; counterInc++,i++) {
+
+            var data = document.createTextNode(i.toString());
+            var col = document.getElementById(counterInc);
+            col.appendChild(data);
+        }
+
+    }
+
+    window.onload = tableDraw;
+</script>
+</body>
+</html>
